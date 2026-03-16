@@ -40,10 +40,18 @@ def migrate():
     
     # 1. Add interview_questions
     # We use TEXT because SQLite stores JSON as TEXT
+    if check_and_add_column(cursor, 'users', 'is_admin', 'BOOLEAN DEFAULT 0'):
+        changes = True
+
+    # 2. Add password_reset_required
+    if check_and_add_column(cursor, 'users', 'password_reset_required', 'BOOLEAN DEFAULT 0'):
+        changes = True
+
+    # 3. Add interview_questions
     if check_and_add_column(cursor, 'analyses', 'interview_questions', 'TEXT'):
         changes = True
         
-    # 2. Add skill_resources
+    # 4. Add skill_resources
     if check_and_add_column(cursor, 'analyses', 'skill_resources', 'TEXT'):
         changes = True
 

@@ -34,12 +34,6 @@ class RegistrationForm(FlaskForm):
         DataRequired(message='Password confirmation is required'),
         EqualTo('password', message='Passwords must match')
     ])
-    role = SelectField('Register As', choices=[
-        ('user', 'User (Job Seeker)'),
-        ('hr', 'HR (Recruiter)'),
-        ('admin', 'Admin')
-    ], default='user', validators=[DataRequired()])
-    admin_code = StringField('Admin Secret Code', validators=[Optional()])
     submit = SubmitField('Register')
     
     def validate_username(self, field):
@@ -94,37 +88,6 @@ class QuickAnalysisForm(FlaskForm):
         Length(min=50, max=5000, message='Job description must be between 50 and 5000 characters')
     ])
     submit = SubmitField('Analyze')
-
-class JobPostingForm(FlaskForm):
-    """Job posting form for HR users"""
-    title = StringField('Job Title', validators=[
-        DataRequired(message='Job title is required'),
-        Length(max=255, message='Title must be less than 255 characters')
-    ])
-    company = StringField('Company Name', validators=[
-        DataRequired(message='Company name is required'),
-        Length(max=255, message='Company name must be less than 255 characters')
-    ])
-    description = TextAreaField('Job Description', validators=[
-        DataRequired(message='Job description is required'),
-        Length(min=50, max=5000, message='Description must be between 50 and 5000 characters')
-    ])
-    required_skills = StringField('Required Skills (comma-separated)', validators=[
-        Optional(),
-        Length(max=500, message='Skills must be less than 500 characters')
-    ])
-    salary_min = StringField('Minimum Salary', validators=[Optional()])
-    salary_max = StringField('Maximum Salary', validators=[Optional()])
-    location = StringField('Location', validators=[
-        Optional(),
-        Length(max=255, message='Location must be less than 255 characters')
-    ])
-    job_url = StringField('Job URL', validators=[
-        Optional(),
-        Length(max=500, message='URL must be less than 500 characters')
-    ])
-    submit = SubmitField('Post Job')
-
 
 class EducationEntryForm(Form):
     """Education entry sub-form"""

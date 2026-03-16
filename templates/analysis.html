@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="glass-card p-4 text-center">
+            <h5 class="fw-bold mb-3">ATS Compatibility Score</h5>
+            <div class="progress mb-3" style="height: 25px;">
+                <div class="progress-bar {% if score > 70 %}bg-success{% elif score > 40 %}bg-warning{% else %}bg-danger{% endif %}"
+                    role="progressbar" style="width: {{ score }}%;">{{ score }}%</div>
+            </div>
+            <p class="text-muted small">Based on industry standard keyword analysis.</p>
+        </div>
+
+        <div class="glass-card p-4 mt-4">
+            <h5 class="fw-bold mb-3">Keywords Found</h5>
+            <div class="d-flex flex-wrap gap-2">
+                {% for kw in keywords %}
+                <span class="badge bg-light text-primary border">{{ kw }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="glass-card p-4">
+            <h4 class="fw-bold mb-4">Smart Interview Prep</h4>
+            <div class="list-group list-group-flush">
+                {% for q in questions %}
+                <div class="list-group-item bg-transparent">
+                    <p class="mb-1 text-primary fw-semibold">Question {{ loop.index }}:</p>
+                    <p class="mb-0">{{ q }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="glass-card p-4 mt-4">
+            <h4 class="fw-bold mb-4">Skill Gap Roadmap</h4>
+            <div class="alert alert-info border-0">
+                <h6 class="fw-bold">Next Steps for Mastery:</h6>
+                <ul class="mb-0">
+                    <li>Contribute to an Open Source project using {{ resume.skills[0] if resume.skills else 'your top
+                        skill' }}.</li>
+                    <li>Explore advanced patterns in Flask and SQLAlchemy for production scaling.</li>
+                    <li>Prepare a portfolio site using modern UI/UX principles.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

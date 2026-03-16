@@ -21,11 +21,9 @@ class User(UserMixin, db.Model):
     last_name = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    
-    # Admin fields
     is_admin = db.Column(db.Boolean, default=False)
-    role = db.Column(db.String(20), default='user')
-    
+    password_reset_required = db.Column(db.Boolean, default=False)
+
     # Relationships
     resumes = db.relationship('Resume', backref='user', lazy=True, cascade='all, delete-orphan')
     analyses = db.relationship('Analysis', backref='user', lazy=True, cascade='all, delete-orphan')

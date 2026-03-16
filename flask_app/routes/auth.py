@@ -19,20 +19,11 @@ def register():
     
     form = RegistrationForm()
     if form.validate_on_submit():
-        # Validate admin code if admin role selected
-        if form.role.data == 'admin':
-            from flask import current_app
-            if form.admin_code.data != current_app.config['ADMIN_SECRET_CODE']:
-                flash('Invalid admin secret code. Please contact the administrator.', 'danger')
-                return redirect(url_for('auth.register'))
-        
         user = User(
             username=form.username.data,
             email=form.email.data,
             first_name=form.first_name.data or '',
-            last_name=form.last_name.data or '',
-            role=form.role.data,
-            is_admin=(form.role.data == 'admin')
+            last_name=form.last_name.data or ''
         )
         user.set_password(form.password.data)
         

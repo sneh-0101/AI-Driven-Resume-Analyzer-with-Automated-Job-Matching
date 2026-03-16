@@ -24,10 +24,6 @@ class Config:
     # WTForms
     WTF_CSRF_TIME_LIMIT = None
     
-    # Admin registration
-    ADMIN_SECRET_CODE = os.environ.get('ADMIN_SECRET_CODE') or 'admin2026'
-
-
 class DevelopmentConfig(Config):
     """Development configuration"""
     DEBUG = True

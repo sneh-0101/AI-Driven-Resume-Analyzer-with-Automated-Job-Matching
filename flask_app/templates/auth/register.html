@@ -85,23 +85,6 @@
                         </div>
 
                         <div class="mb-3">
-                            {{ form.role.label(class="form-label") }}
-                            {{ form.role(class="form-select", id="roleSelect") }}
-                            <small class="text-muted">Choose User for job searching, HR for recruitment, or Admin for
-                                platform management</small>
-                        </div>
-
-                        <div class="mb-4" id="adminCodeDiv" style="display: none;">
-                            {{ form.admin_code.label(class="form-label") }}
-                            {{ form.admin_code(class="form-control", placeholder="Enter admin secret code",
-                            id="adminCode") }}
-                            <small class="text-warning">
-                                <i class="fas fa-lock"></i> Admin access requires a secret code. Contact the
-                                administrator if you need this.
-                            </small>
-                        </div>
-
-                        <div class="mb-3">
                             {{ form.submit(class="btn btn-primary w-100 btn-lg") }}
                         </div>
                     </form>
@@ -115,23 +98,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const roleSelect = document.getElementById('roleSelect');
-        const adminCodeDiv = document.getElementById('adminCodeDiv');
-        const adminCodeInput = document.getElementById('adminCode');
-
-        roleSelect.addEventListener('change', function () {
-            if (this.value === 'admin') {
-                adminCodeDiv.style.display = 'block';
-                adminCodeInput.required = true;
-            } else {
-                adminCodeDiv.style.display = 'none';
-                adminCodeInput.required = false;
-                adminCodeInput.value = '';
-            }
-        });
-    });
-</script>
 {% endblock %}

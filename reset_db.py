@@ -25,19 +25,22 @@ def seed_database():
 
         try:
             # 3. Create Users
-            admin = User(username='admin', email='admin@example.com', first_name='System', last_name='Admin', is_admin=True, role='admin')
+            admin = User(
+                username='admin',
+                email='admin@example.com',
+                first_name='System',
+                last_name='Admin',
+                is_admin=True
+            )
             admin.set_password('admin123')
-            
-            test_user = User(username='user', email='user@example.com', first_name='Jane', last_name='Doe', is_admin=False, role='user')
+
+            test_user = User(username='user', email='user@example.com', first_name='Jane', last_name='Doe')
             test_user.set_password('user123')
-            
-            hr_user = User(username='hr', email='hr@example.com', first_name='HR', last_name='Manager', is_admin=False, role='hr')
-            hr_user.set_password('hr123')
-            
-            db.session.add_all([admin, test_user, hr_user])
+
+            db.session.add_all([admin, test_user])
             db.session.flush() # Get IDs
 
-            # 4. Create Demo Job Posting (HR)
+            # 4. Create Demo Job Posting
             demo_jd_text = """
             Senior Python Developer - Innovation Labs
             
@@ -59,7 +62,7 @@ def seed_database():
                 description=demo_jd_text,
                 required_skills=['Python', 'Flask', 'PostgreSQL', 'Redis', 'AWS', 'API Design'],
                 location='Remote / New York',
-                posted_by=hr_user.id
+                posted_by=test_user.id
             )
             db.session.add(demo_job)
             

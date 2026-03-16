@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="glass-card p-5">
+            <h2 class="fw-bold mb-4">{{ 'Edit' if edit_mode else 'Create' }} Resume</h2>
+            <form method="POST">
+                <div class="row g-3">
+                    <div class="col-md-12 mb-4">
+                        <label class="form-label fw-bold">Resume Title</label>
+                        <input type="text" name="title" class="form-control"
+                            value="{{ resume.title if resume else '' }}" required
+                            placeholder="e.g. Software Engineer Resume">
+                    </div>
+
+                    <h5 class="fw-bold mt-4">Personal Information</h5>
+                    <div class="col-md-6">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="full_name" class="form-control"
+                            value="{{ resume.full_name if resume else '' }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control"
+                            value="{{ resume.email if resume else '' }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Phone</label>
+                        <input type="text" name="phone" class="form-control"
+                            value="{{ resume.phone if resume else '' }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Website/LinkedIn</label>
+                        <input type="text" name="website" class="form-control"
+                            value="{{ resume.website if resume else '' }}">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Professional Summary</label>
+                        <textarea name="summary" class="form-control"
+                            rows="4">{{ resume.summary if resume else '' }}</textarea>
+                    </div>
+
+                    <h5 class="fw-bold mt-5">Skills (comma separated)</h5>
+                    <div class="col-12">
+                        <input type="text" name="skills" class="form-control"
+                            value="{{ ', '.join(resume.skills) if resume else '' }}"
+                            placeholder="Python, Flask, JavaScript, SQL">
+                    </div>
+
+                    <h5 class="fw-bold mt-5">Select Template</h5>
+                    <div class="col-md-4">
+                        <select name="template_id" class="form-select">
+                            <option value="template1" {{ 'selected' if resume and resume.template_id=='template1'
+                                else '' }}>Modern Professional</option>
+                            <option value="template2" {{ 'selected' if resume and resume.template_id=='template2'
+                                else '' }}>Clean Minimalist</option>
+                            <option value="template3" {{ 'selected' if resume and resume.template_id=='template3'
+                                else '' }}>Creative Sidebar</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 mt-5">
+                        <button type="submit" class="btn btn-primary btn-lg px-5">Save Resume</button>
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-link text-muted">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
